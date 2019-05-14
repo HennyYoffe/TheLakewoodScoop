@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Lesson63_WebScraping_TheLakewoodScoop_May13.Models;
+using ClassLibrary1;
 
 namespace Lesson63_WebScraping_TheLakewoodScoop_May13.Controllers
 {
@@ -12,32 +13,11 @@ namespace Lesson63_WebScraping_TheLakewoodScoop_May13.Controllers
     {
         public IActionResult Index()
         {
-            return View();
+            var mgr = new ScoopManager();
+            List<NewsItem> items = mgr.ScrapeLS();
+            return View(items);
         }
 
-        public IActionResult About()
-        {
-            ViewData["Message"] = "Your application description page.";
-
-            return View();
-        }
-
-        public IActionResult Contact()
-        {
-            ViewData["Message"] = "Your contact page.";
-
-            return View();
-        }
-
-        public IActionResult Privacy()
-        {
-            return View();
-        }
-
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
-        {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
-        }
+       
     }
 }
